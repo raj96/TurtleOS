@@ -19,3 +19,6 @@ Learn about OS development and RISC-V architecture
     * GCC Toolchain for riscv
     * Make
 * Run `make` in the root of the project
+
+# Device tree
+virt.dts

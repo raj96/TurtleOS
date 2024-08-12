@@ -184,10 +184,26 @@
 			#address-cells = <0x00>;
 		};
 
-		clint@2000000 {
-			interrupts-extended = <0x02 0x03 0x02 0x07>;
-			reg = <0x00 0x2000000 0x00 0x10000>;
-			compatible = "sifive,clint0\0riscv,clint0";
+		sswi@2f00000 {
+			#interrupt-cells = <0x00>;
+			interrupt-controller;
+			interrupts-extended = <0x02 0x01>;
+			reg = <0x00 0x2f00000 0x00 0x4000>;
+			compatible = "riscv,aclint-sswi";
+		};
+
+		mtimer@2004000 {
+			interrupts-extended = <0x02 0x07>;
+			reg = <0x00 0x200bff8 0x00 0x4008 0x00 0x2004000 0x00 0x7ff8>;
+			compatible = "riscv,aclint-mtimer";
+		};
+
+		mswi@2000000 {
+			#interrupt-cells = <0x00>;
+			interrupt-controller;
+			interrupts-extended = <0x02 0x03>;
+			reg = <0x00 0x2000000 0x00 0x4000>;
+			compatible = "riscv,aclint-mswi";
 		};
 	};
 };

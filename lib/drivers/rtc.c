@@ -2,7 +2,6 @@
 #include "drivers/rtc.h"
 #include "addr_op.h"
 
-
 int64_t rtc_read() {
     int64_t time;
 

@@ -1,5 +1,15 @@
 #include "kutils/time.h"
 
+static int64_t _gmt_adjust;
+
+void time_set_tz(GMT_TYPE type, int hours, int mins) {
+    _gmt_adjust = hours * 60 * 60 * 1e9;
+    _gmt_adjust += mins * 60 * 1e9;
+    if(type == GMT_MINUS) {
+        _gmt_adjust *= -1;
+    }
+}
+
 s_timestamp time_now() {
     int sec_in_min = 60;
 
@@ -56,7 +66,7 @@ s_timestamp time_now() {
     s_timestamp curr;
 
     curr.year = EPOCH_YEAR;
-    int64_t epoch = rtc_read();
+    int64_t epoch = rtc_read() + _gmt_adjust;
 
     while(epoch > ns_in_leap_year) {
         if(IS_LEAP_YEAR(curr.year)) {

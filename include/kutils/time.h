@@ -29,6 +29,12 @@ typedef struct {
     int64_t ns;
 } s_timestamp;
 
+typedef enum {
+    GMT_PLUS,
+    GMT_MINUS
+} GMT_TYPE;
+
+void time_set_tz(GMT_TYPE type, int hours, int mins);
 s_timestamp time_now();
 
 #endif

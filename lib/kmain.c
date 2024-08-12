@@ -6,17 +6,15 @@
 
 void kmain() {
     uart_init();
-    println("Dropped to supervisor mode...");
-    printf("My name is %s\n", "Raj");
-    printf("Roll number: %d\n", 48);
-    printf("num: %d\thex: %x\tbinary: %b\n", 67, 67, 67);
-
-    unsigned long int thresh = 100000000UL;
-    // while(1) {
+    println("UART initialized");
+    unsigned long int thresh = 1000000000UL;
+    time_set_tz(GMT_PLUS, 5, 30);   // Set timezone to GMT+5:30
+    
+    while(1) {
         for(unsigned long int i = 0; i < thresh; i++); 
         s_timestamp time = time_now();
         printf("time: %d/%d/%d %d:%d:%d\n", time.date, time.month, time.year, time.hours, time.minutes, time.seconds);
-    // }
+    }
 
     while(1);
 }
