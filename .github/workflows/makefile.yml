@@ -24,7 +24,6 @@ jobs:
       uses: actions/upload-artifact@v4.3.6
       with:
         name: kernel.elf
-        path: ./releases
         if-no-files-found: error
         overwrite: true
           
