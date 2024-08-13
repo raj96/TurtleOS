@@ -19,3 +19,13 @@ jobs:
 
     - name: Build kernel.elf
       run: make build-dist
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.6
+      with:
+        name: kernel.elf
+        path: "releases"
+        warn: Output a warning but do not fail the action
+        error: Fail the action with an error message
+        overwrite: true
+          
