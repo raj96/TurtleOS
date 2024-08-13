@@ -6,14 +6,11 @@ void kentry() {
     // Set mstatus to drop to supervisor mode when mret is issued and enable supervisor mode interrupts
     mstatus_write(mstatus_read() | MSTATUS_MIE | MSTATUS_SIE | MSTATUS_MPIE | MSTATUS_MPP_S);
 
-    // Enable timer interrupt in machine mode
-    mie_write(mie_read() | MIE_MTIE | MIE_STIE);
+    // Enable interrupts in machine mode
+    mie_write(mie_read() | MIE_MTIE | MIE_STIE | MIE_SEIE | MIE_MEIE | MIE_MSIE | MIE_SSIE);
 
     // Enable interrupts in supervisor mode
     sstatus_write(sstatus_read() | SSTATUS_SIE);
-
-    // Enable timer interrupt in supervisor mode
-    sie_write(sie_read() | SIE_STIE);
 
     // Delegate all interrupts to supervisor mode
     mideleg_write(0xffff);

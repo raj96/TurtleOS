@@ -1,4 +1,4 @@
-// Driver for goldfish rtc
+// Driver for goldfish rtc; specs followed https://android.googlesource.com/platform/external/qemu/+/master/docs/GOLDFISH-VIRTUAL-HARDWARE.TXT#254
 #include "drivers/rtc.h"
 #include "addr_op.h"
 

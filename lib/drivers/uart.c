@@ -1,4 +1,4 @@
-// Driver for ns16550a
+// Driver for ns16550a; spec followed http://byterunner.com/16550.html
 #include "drivers/uart.h"
 #include "addr_op.h"
 

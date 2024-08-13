@@ -6,6 +6,7 @@ Learn about OS development and RISC-V architecture
 # Drivers implemented
 * UART  [ns16550a]
 * RTC   [goldfish-rtc]
+* PLIC  [plic-v1.0.0]
 
 # Code Structure
 * Machine mode code in entry.s and kernel.c

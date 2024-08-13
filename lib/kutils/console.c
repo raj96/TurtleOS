@@ -6,11 +6,11 @@
 
 char nums[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-void print(char *str) {
+void kprint(char *str) {
     uart_write(str);
 }
 
-void println(char *str) {
+void kprintln(char *str) {
     uart_write(str);
     uart_write_byte('\n');
     uart_write_byte('\r');
@@ -37,7 +37,7 @@ void _print_num(uint64_t num, int base) {
 //  %b - Binary
 //  %c - Character
 //  %s - String
-void printf(char *fmt, ...) {
+void kprintf(char *fmt, ...) {
     va_list ap;
 
     va_start(ap, fmt);
