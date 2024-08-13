@@ -20,11 +20,11 @@ jobs:
     - name: Build kernel.elf
       run: make build-dist && mkdir -p releases
 
-    - name: Upload a Build Artifact
+    - name: Upload the kernel
       uses: actions/upload-artifact@v4.3.6
       with:
-        name: kernel.elf
-        path: .
+        name: kernel
+        path: ./kernel.elf
         if-no-files-found: error
         overwrite: true
           
