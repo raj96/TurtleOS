@@ -10,11 +10,11 @@ void plic_enable_intr(int source, int ctxt) {
 }
 
 void plic_set_intr_priority(int source, uint32_t priority) {
-    ADDR_WRITE((uint64_t)(PLIC_INTR_SRC_PRIORITY(source)), priority, uint32_t);
+    ADDR_WRITE(PLIC_INTR_SRC_PRIORITY(source), priority, uint32_t);
 }
 
 void plic_set_intr_threshold(int ctxt, uint32_t threshold) {
-    ADDR_WRITE((uint64_t)(PLIC_THRESH(ctxt)), threshold, uint32_t);
+    ADDR_WRITE(PLIC_THRESH(ctxt), threshold, uint32_t);
 }
 
 uint32_t plic_claim(int ctxt) {

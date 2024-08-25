@@ -1,6 +1,13 @@
 #include "csr_op.h"
 #include "drivers/syscon.h"
+#include "drivers/uart.h"
+#include "kutils/console.h"
+#include "drivers/clint.h"
+#include "addr_op.h"
+
 void kmain();
+void intr() __attribute__((aligned(8)));
+
 
 void kentry() {
     // Set mstatus to drop to supervisor mode when mret is issued and enable supervisor mode interrupts
@@ -30,6 +37,11 @@ void kentry() {
 
     CSRW_OP("pmpaddr0", 0x3fffffffffffffull);
     CSRW_OP("pmpcfg0", 0xf);
+
+    CSRW_OP("stvec", (uint64_t)intr);
+    CSRW_OP("mtvec", (uint64_t)intr);
+
+    ADDR_WRITE(CLINT_MTIMECMP, 500000UL, uint64_t);
 
     // Start kernel
     asm volatile("mret");

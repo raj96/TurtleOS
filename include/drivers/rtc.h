@@ -2,7 +2,7 @@
 #ifndef _RTC_H
 #define _RTC_H
 
-#define RTC_ADDR        0x101000
+#define RTC_ADDR        0x101000UL
 #define RTC_TIME_LOW    RTC_ADDR
 #define RTC_TIME_HIGH   (RTC_ADDR + 0x04)
 #define RTC_ALARM_LOW   (RTC_ADDR + 0x08)

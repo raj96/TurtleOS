@@ -17,8 +17,8 @@ void uart_init() {
     // Enable and clear the FIFO
     ADDR_WRITE(UART_FCR, 0x07, char);
 
-    // Enable receiver ready and transmitter empty interrupts
-    ADDR_WRITE(UART_IER, 0x03, char);
+    // Enable receiver ready, line status and transmitter empty interrupts
+    ADDR_WRITE(UART_IER, 0x07, char);
 }
 
 void uart_write_byte(char byte) {
@@ -49,4 +49,7 @@ void uart_write(char *bytes) {
 
 char* uart_read() {}
 
-void uart_close() {}
+void uart_close() {
+    // Disable all interrupts
+    ADDR_WRITE(UART_IER, 0x00, char);
+}

@@ -16,7 +16,7 @@ void kprintln(char *str) {
     uart_write_byte('\r');
 }
 
-void _print_num_base(uint64_t num, int base) {
+void _print_num_base(int64_t num, int base) {
     if(num == 0) { return; }
 
     int digit = num % base;
@@ -24,10 +24,11 @@ void _print_num_base(uint64_t num, int base) {
     uart_write_byte(nums[digit]);
 }
 
-void _print_num(uint64_t num, int base) {
+void _print_num(int64_t num, int base) {
     if(num == 0) {
         uart_write_byte('0');
     } else {
+        if(num <  0) { kprint("-"); num *= -1;}
         _print_num_base(num, base);
     }
 }
@@ -37,6 +38,8 @@ void _print_num(uint64_t num, int base) {
 //  %b - Binary
 //  %c - Character
 //  %s - String
+//  %l - signed long decimal
+//  %u - unsigned long decimal
 void kprintf(char *fmt, ...) {
     va_list ap;
 
