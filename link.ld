@@ -3,6 +3,7 @@ ENTRY(_entry)
 
 SECTIONS {
     . = 0x80000000;
+    PROVIDE(mem_start = .);
 
     .text : {
       *(.entry)
@@ -31,4 +32,6 @@ SECTIONS {
     }
 
   PROVIDE(stack_top = .);
+  . += (STACK_SIZE * NUM_CPU);          /* See entry.s for values */
+  PROVIDE(stack_end = .);
 }

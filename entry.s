@@ -1,5 +1,10 @@
 .global _entry
-.equ STACK_SIZE, 8192
+
+.equ STACK_SIZE, 16384
+.global STACK_SIZE
+
+.equ NUM_CPU, 1
+.global NUM_CPU
 
 .section .entry
 _entry:

@@ -24,11 +24,18 @@ void _print_num_base(int64_t num, int base) {
     uart_write_byte(nums[digit]);
 }
 
-void _print_num(int64_t num, int base) {
+void _print_num(uint64_t num, int base, int sign) {
+    
     if(num == 0) {
         uart_write_byte('0');
     } else {
-        if(num <  0) { kprint("-"); num *= -1;}
+        if(sign == 1) {
+            int64_t s_num = (int64_t)num;
+            if(s_num <  0) { 
+                kprint("-");
+                num = s_num * -1;
+            }
+        }
         _print_num_base(num, base);
     }
 }
@@ -64,25 +71,29 @@ void kprintf(char *fmt, ...) {
                     uart_write(va_arg(ap, char *));
                     break;
                 case 'd':
-                    _print_num(va_arg(ap, int64_t), 10);
+                    _print_num(va_arg(ap, int64_t), 10, 1);
                     break;
                 case 'x':
                     uart_write("0x");
-                    _print_num(va_arg(ap, uint64_t), 16);
+                    _print_num(va_arg(ap, uint64_t), 16, 0);
                     break;
                 case 'b':
                     uart_write("0b");
-                    _print_num(va_arg(ap, uint64_t), 2);
+                    _print_num(va_arg(ap, uint64_t), 2, 0);
                     break;
                 case 'l':
-                    _print_num(va_arg(ap, int64_t), 10);
+                    _print_num(va_arg(ap, int64_t), 10, 1);
                     break;
                 case 'u':
-                    _print_num(va_arg(ap, uint64_t), 10);
+                    _print_num(va_arg(ap, uint64_t), 10, 0);
             }
         }
         fmt++;
     }
 
     va_end(ap);
+}
+
+void kscanf(char *fmt, ...) {
+    
 }

@@ -8,7 +8,6 @@
 void kmain();
 void intr() __attribute__((aligned(8)));
 
-
 void kentry() {
     // Set mstatus to drop to supervisor mode when mret is issued and enable supervisor mode interrupts
     mstatus_write(mstatus_read() | MSTATUS_MIE | MSTATUS_SIE | MSTATUS_MPIE | MSTATUS_MPP_S);
@@ -41,7 +40,7 @@ void kentry() {
     CSRW_OP("stvec", (uint64_t)intr);
     CSRW_OP("mtvec", (uint64_t)intr);
 
-    ADDR_WRITE(CLINT_MTIMECMP, 500000UL, uint64_t);
+    // ADDR_WRITE(CLINT_MTIMECMP, 500000UL, uint64_t);
 
     // Start kernel
     asm volatile("mret");

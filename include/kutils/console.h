@@ -5,4 +5,6 @@ void kprint(char *str);
 void kprintf(char *fmt, ...);
 void kprintln(char *str);
 
+void kscanf(char *fmt, ...);
+
 #endif

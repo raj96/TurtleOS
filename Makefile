@@ -5,7 +5,7 @@ CFLAGS=-mcmodel=medany -c -ffreestanding -O3
 SRC=$(shell find . -name '*.c')	
 
 run: build
-	qemu-system-riscv64 -machine virt -m 256M -smp 1 -bios none -kernel kernel.elf
+	qemu-system-riscv64 -machine virt -m 128M -smp 1 -bios none -kernel kernel.elf
 
 build: clean
 	$(TOOLCHAIN)as entry.s -o entry.o
