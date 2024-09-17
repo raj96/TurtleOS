@@ -18,7 +18,7 @@ void uart_init() {
     ADDR_WRITE(UART_FCR, 0x07, char);
 
     // Enable receiver ready, line status and transmitter empty interrupts
-    ADDR_WRITE(UART_IER, 0x07, char);
+    // ADDR_WRITE(UART_IER, 0x07, char);
 }
 
 void uart_write_byte(char byte) {

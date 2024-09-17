@@ -7,6 +7,8 @@
 #define MEM_SIZE    (128 * 1024 * 1024)             // 128 MB
 #define BITMAP_SIZE ((MEM_SIZE / PAGE_SIZE) / 8)    // Space will be used to store bitmap (in bytes)
 
+#define NULL ((void *)0)
+
 void kmem_init();
 void* kmalloc(uint64_t size);
 void kfree(void *allocated);

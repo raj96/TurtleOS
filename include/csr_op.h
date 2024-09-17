@@ -66,4 +66,7 @@ void sie_write(uint64_t sie);
 uint64_t sstatus_read();
 void sstatus_write(uint64_t ss);
 
+uint64_t sepc_read();
+void sepc_write(uint64_t sepc);
+
 #endif

@@ -41,7 +41,6 @@ int64_t _bitmap_get_scb(uint32_t req_pages) {
             while(i < num_pages && _bitmap_get_bit(i++) == 0) {
                 t_scb_len++;
             }
-            kprintf("t_scb_len: %d\treq_pages: %d\tscb_len: %d\n", t_scb_len, req_pages, scb_len);
             if(t_scb_len >= req_pages && t_scb_len < scb_len) {
                 scb_len = t_scb_len;
                 scb_index = t_scb_index;
@@ -57,9 +56,11 @@ void _kmem_defragment() {
 
 }
 
-void kmem_init() {
-    kprintf("kmem_init\n");
+void _kmem_page_move(int64_t src_page, int64_t dest_page) {
 
+}
+
+void kmem_init() {
     // Set all the pages free
     for(int i = 0; i < BITMAP_SIZE; i++) {
         mem_bitmap[i] = 0;

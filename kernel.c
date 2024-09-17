@@ -6,7 +6,7 @@
 #include "addr_op.h"
 
 void kmain();
-void intr() __attribute__((aligned(8)));
+void _ktask_intr_handler() __attribute__((aligned(8)));
 
 void kentry() {
     // Set mstatus to drop to supervisor mode when mret is issued and enable supervisor mode interrupts
@@ -25,8 +25,6 @@ void kentry() {
     // Enable interrupts in supervisor mode
     sie_write(sie_read() | SIE_STIE | SIE_SSIE | SIE_SEIE);
 
-    // Set tp to mhartid
-    asm volatile("csrr tp, mhartid");
 
     // Set trap to kernel main
     CSRW_OP("mepc", (uint64_t)kmain);
@@ -37,10 +35,10 @@ void kentry() {
     CSRW_OP("pmpaddr0", 0x3fffffffffffffull);
     CSRW_OP("pmpcfg0", 0xf);
 
-    CSRW_OP("stvec", (uint64_t)intr);
-    CSRW_OP("mtvec", (uint64_t)intr);
+    CSRW_OP("stvec", (uint64_t)_ktask_intr_handler);
+    CSRW_OP("mtvec", (uint64_t)_ktask_intr_handler);
 
-    // ADDR_WRITE(CLINT_MTIMECMP, 500000UL, uint64_t);
+    ADDR_WRITE(CLINT_MTIMECMP, 50000000UL, uint64_t);
 
     // Start kernel
     asm volatile("mret");

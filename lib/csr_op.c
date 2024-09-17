@@ -47,3 +47,11 @@ uint64_t sstatus_read() {
 void sstatus_write(uint64_t ss) {
     CSRW_OP("sstatus", ss);
 }
+
+uint64_t sepc_read() {
+    CSRR_OP("sepc", uint64_t);
+}
+
+void sepc_write(uint64_t sepc) {
+    CSRW_OP("sepc", sepc);
+}

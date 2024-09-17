@@ -2,14 +2,15 @@ TOOLCHAIN=riscv64-unknown-elf-
 IFLAGS=-I./include
 CFLAGS=-mcmodel=medany -c -ffreestanding -O3
 
-SRC=$(shell find . -name '*.c')	
+ASRC=$(shell find . -name '*.s')
+CSRC=$(shell find . -name '*.c')	
 
 run: build
 	qemu-system-riscv64 -machine virt -m 128M -smp 1 -bios none -kernel kernel.elf
 
 build: clean
-	$(TOOLCHAIN)as entry.s -o entry.o
-	$(TOOLCHAIN)gcc $(IFLAGS) $(CFLAGS) $(SRC)
+	$(TOOLCHAIN)as $(ASRC) -o assembly_routines.o
+	$(TOOLCHAIN)gcc $(IFLAGS) $(CFLAGS) $(CSRC)
 	$(TOOLCHAIN)ld -T link.ld *.o -o kernel.elf
 	$(MAKE) clean-dist
 

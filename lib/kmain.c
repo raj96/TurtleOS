@@ -7,13 +7,18 @@
 #include "drivers/plic.h"
 #include "drivers/clint.h"
 #include "kutils/kmem.h"
+#include "kutils/ktask.h"
 
+void test_task1() {
+    for(int i = 0; i < 10; i++) {
+        kprint("Test Task 1\n");
+    }
+}
 
-void intr() {
-    // mstatus_write(mstatus_read() & (~MSTATUS_MIE));
-
-    // ADDR_WRITE(CLINT_MTIMECMP, ADDR_READ(CLINT_MTIME, uint64_t) + 5000000UL, uint64_t);
-    // mstatus_write(mstatus_read() | MSTATUS_MIE);
+void test_task2() {
+    for(int i = 0; i < 10; i++) {
+        kprint("Test Task 2 !!!\n");
+    }
 }
 
 void kmain() {
@@ -21,32 +26,15 @@ void kmain() {
 
     uart_init();
     kprintln("UART initialized");
+
     kmem_init();
-
-    void *addr = kmalloc(PAGE_SIZE * 5);
-    kprintf("\n");
-
-    void *addr1 = kmalloc(PAGE_SIZE * 2);
-    kprintf("\n");
-    kfree(addr);
-
-
-    void *addr2 = kmalloc(PAGE_SIZE * 4);
-    kprintf("\n");
-
-    void *addr3 = kmalloc(PAGE_SIZE * 101.1);
-    void *addr4 = kmalloc(PAGE_SIZE * 1);
-    void *addr5 = kmalloc(PAGE_SIZE * 1);
-    kfree(addr1);
-    kfree(addr2);
-    kfree(addr3);
-    kfree(addr4);
-    kfree(addr5);
-
-    kprintf("\n");
+    ktask_init();
 
     time_set_tz(GMT_PLUS, 5, 30);   // Set timezone to GMT +5:30
     kprintf("time: %d/%d/%d %d:%d:%d\n", time.date, time.month, time.year, time.hours, time.minutes, time.seconds);    
 
-    while(1);
+    ktask_add(&test_task1);
+    ktask_add(&test_task2);
+    
+    ktask_run_scheduler();
 }

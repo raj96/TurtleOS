@@ -6,5 +6,4 @@
 #define CLINT_MTIMECMP  (CLINT_ADDR + 0x4000)
 #define CLINT_MTIME     (CLINT_ADDR + 0xBFF8)
  
-
 #endif
