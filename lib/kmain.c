@@ -9,15 +9,18 @@
 #include "kutils/kmem.h"
 #include "kutils/ktask.h"
 
+
 void test_task1() {
-    for(int i = 0; i < 10; i++) {
-        kprint("Test Task 1\n");
+    for(uint64_t t1 = 0; t1 < 1e9;) {
+        kprintf("t1: %u\n", t1);
+        t1++;
     }
 }
 
 void test_task2() {
-    for(int i = 0; i < 10; i++) {
-        kprint("Test Task 2 !!!\n");
+    for(uint64_t t2 = 0; t2 < 1e9;) {
+        kprintf("t2: %u\n", t2);
+        t2++;
     }
 }
 

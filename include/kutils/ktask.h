@@ -7,13 +7,13 @@ typedef enum {
     KTASK_QUEUED,
     KTASK_RUNNING,
     KTASK_WAITING,
-    KTASK_STOPPED
+    KTASK_COMPLETED
 } ktask_state;
 
 typedef struct _ktask_node{
-    uint64_t tid;
     uint64_t reg[32];
     ktask_state state;
+    uint64_t tid;
     struct _ktask_node *next;
 } ktask_node;
 
