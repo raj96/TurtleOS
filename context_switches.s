@@ -1,5 +1,3 @@
-#include "kutils/ktask.h"
-
 .global store_context
 .global load_context
 
