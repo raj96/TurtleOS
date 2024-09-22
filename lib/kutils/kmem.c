@@ -71,6 +71,7 @@ void kmem_init() {
     heap_alloc_info = (uint32_t *)stack_end;
     heap_end = mem_start + MEM_SIZE;
     num_pages = ((uint64_t)heap_end - (uint64_t)heap_alloc_info)/PAGE_SIZE;
+    kprintf("heap_alloc_info: %x\n", heap_alloc_info);
     
     // Each bitmap allocation will have it's own 32 bit (4 bytes) counter for the number of pages allocated to it
     heap_start = (char *)heap_alloc_info + (num_pages * 4);
@@ -101,9 +102,11 @@ void* kmalloc(uint64_t size) {
 
     *(heap_alloc_info + scb*4) = req_pages;
     while(req_pages > 0) {
+        // kprintf("setting bit %u\n", scb + (req_pages-1));
         _bitmap_set_bit(scb + (req_pages-1));
         req_pages--;
     }
+    // kprintf("returning: %x\n\n", heap_start+scb*PAGE_SIZE);
     return heap_start + scb*PAGE_SIZE;
 }
 

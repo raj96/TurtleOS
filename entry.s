@@ -6,6 +6,7 @@
 .equ NUM_CPU, 1
 .global NUM_CPU
 
+.section .text
 .section .entry
 _entry:
     la sp, stack_top

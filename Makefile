@@ -3,13 +3,15 @@ IFLAGS=-I./include
 CFLAGS=-mcmodel=medany -c -ffreestanding -O3
 
 ASRC=$(shell find . -name '*.s')
-CSRC=$(shell find . -name '*.c')	
+CSRC=$(shell find . -name '*.c')
+
+QEMU=qemu-system-riscv64 -m 128M -smp 1 -machine virt
 
 run: build
-	qemu-system-riscv64 -machine virt -m 128M -smp 1 -bios none -kernel kernel.elf
+	$(QEMU) -bios none -kernel kernel.elf
 
 run-debug: build-debug
-	qemu-system-riscv64 -machine virt -m 128M -smp 1 -bios none -kernel kernel.elf -s
+	$(QEMU) -bios none -kernel kernel.elf -s
 
 build-debug: clean
 	$(TOOLCHAIN)as $(IFLAGS) $(ASRC) -o assembly_routines.o
@@ -32,3 +34,7 @@ clean:
 
 clean-dist:
 	rm -f *.o
+
+dump-dtb:
+	$(QEMU),dumpdtb=machine.dtb
+	dtc -O dts -o machine.dts machine.dtb

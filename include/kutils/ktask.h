@@ -12,6 +12,7 @@ typedef enum {
 
 typedef struct _ktask_node{
     uint64_t reg[32];
+    uint64_t pc;
     ktask_state state;
     uint64_t tid;
     struct _ktask_node *next;

@@ -16,8 +16,12 @@
 #define MSTATUS_MPP_S   (1UL << 11)
 #define MSTATUS_MPP_U   (0UL << 11)
 
-uint64_t mstatus_read();
-void mstatus_write(uint64_t ms);
+static inline uint64_t mstatus_read() {
+    CSRR_OP("mstatus", uint64_t);
+}
+static inline void mstatus_write(uint64_t ms) {
+    CSRW_OP("mstatus", ms);
+}
 
 #define MIE_USIE    1UL
 #define MIE_SSIE    (1UL << 1)
@@ -29,8 +33,12 @@ void mstatus_write(uint64_t ms);
 #define MIE_SEIE    (1UL << 9)
 #define MIE_MEIE    (1UL << 11)
 
-uint64_t mie_read();
-void mie_write(uint64_t mie);
+static inline uint16_t mie_read() {
+    CSRR_OP("mie", uint16_t);
+}
+static inline void mie_write(uint16_t mie) {
+    CSRW_OP("mie", mie);
+}
 
 #define MCAUSE_SSI  ((1UL << 63) | 1)
 #define MCAUSE_MSI  ((1UL << 63) | 3)
@@ -44,29 +52,49 @@ void mie_write(uint64_t mie);
 #define MCAUSE_ECALLS   9
 #define MCAUSE_ECALLM   11
 
-uint64_t mideleg_read();
-void mideleg_write(uint64_t mideleg);
+static inline uint64_t mideleg_read() {
+    CSRR_OP("mideleg", uint64_t);
+}
+static inline void mideleg_write(uint64_t mideleg) {
+    CSRW_OP("mideleg", mideleg);
+}
 
-uint64_t medeleg_read();
-void medeleg_write(uint64_t medeleg);
+static inline uint64_t medeleg_read() {
+    CSRR_OP("medeleg", uint64_t);
+}
+static inline void medeleg_write(uint64_t medeleg) {
+    CSRW_OP("medeleg", medeleg);
+}
 
 #define SIE_SSIE    (1 << 1)
 #define SIE_STIE    (1 << 5)
 #define SIE_SEIE    (1 << 9)
 #define SIE_LCOFIE  (1 << 13)
 
-uint64_t sie_read();
-void sie_write(uint64_t sie);
+static inline uint64_t sie_read() {
+    CSRR_OP("sie", uint64_t);
+}
+void sie_write(uint64_t sie) {
+    CSRW_OP("sie", sie);
+}
 
 #define SSTATUS_SIE     (1UL << 1)
 #define SSTATUS_SPIE    (1UL << 5)
 #define SSTATUS_UBE     (1UL << 6)
 #define SSTATUS_SPP     (1UL << 8)
 
-uint64_t sstatus_read();
-void sstatus_write(uint64_t ss);
+uint64_t sstatus_read() {
+    CSRR_OP("sstatus", uint64_t);
+}
+void sstatus_write(uint64_t ss) {
+    CSRW_OP("sstatus", ss);
+}
 
-uint64_t sepc_read();
-void sepc_write(uint64_t sepc);
+uint64_t sepc_read() {
+    CSRR_OP("sepc", uint64_t);
+}
+void sepc_write(uint64_t sepc) {
+    CSRW_OP("sepc", sepc);
+}
 
 #endif
