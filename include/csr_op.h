@@ -74,7 +74,7 @@ static inline void medeleg_write(uint64_t medeleg) {
 static inline uint64_t sie_read() {
     CSRR_OP("sie", uint64_t);
 }
-void sie_write(uint64_t sie) {
+static inline void sie_write(uint64_t sie) {
     CSRW_OP("sie", sie);
 }
 
@@ -83,17 +83,17 @@ void sie_write(uint64_t sie) {
 #define SSTATUS_UBE     (1UL << 6)
 #define SSTATUS_SPP     (1UL << 8)
 
-uint64_t sstatus_read() {
+static inline uint64_t sstatus_read() {
     CSRR_OP("sstatus", uint64_t);
 }
-void sstatus_write(uint64_t ss) {
+static inline void sstatus_write(uint64_t ss) {
     CSRW_OP("sstatus", ss);
 }
 
-uint64_t sepc_read() {
+static inline uint64_t sepc_read() {
     CSRR_OP("sepc", uint64_t);
 }
-void sepc_write(uint64_t sepc) {
+static inline void sepc_write(uint64_t sepc) {
     CSRW_OP("sepc", sepc);
 }
 
