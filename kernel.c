@@ -6,7 +6,7 @@
 #include "addr_op.h"
 
 void kmain();
-extern void store_context() __attribute__((aligned(8)));
+extern void store_context() __attribute__((aligned(4)));
 
 void kentry() {
     // Set mstatus to drop to supervisor mode when mret is issued and enable supervisor mode interrupts
